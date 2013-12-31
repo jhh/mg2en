@@ -1,24 +1,15 @@
-# Mg2en
+# MacGourmet to Evernote
 
-TODO: Write a gem description
+A small command-line tool to move MacGourmet recipes to Evernote by converting
+between their respective export formats. The resulting Evernote export file
+(*.enex) can be imported into Evernote.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'mg2en'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mg2en
+This early version has a hard-code input file name in `bin/mg2en` and does not
+convert all recipe attributes.
 
 ## Usage
 
-TODO: Write usage instructions here
+`bundle exec bin/mg2en`
 
 ## Contributing
 
