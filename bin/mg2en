@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'mg2en.rb'
+
+r = Mg2en::parse_xml('/Users/jeff/Desktop/MacGourmet_Export.mgourmet3')
+Mg2en::emit_enml(r)
