@@ -11,6 +11,10 @@ module Mg2en
         xm.note {
           xm.title(recipe.name)
           xm.content {xm.cdata!(recipe.enml)}
+          xm.tag!(:"note-attributes") {
+            xm.source(recipe.source)
+            xm.tag!(:"source-url") { xm.text! recipe.url }
+          }
         }
       end
     }
