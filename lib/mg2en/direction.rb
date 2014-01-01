@@ -13,7 +13,8 @@ module Mg2en
     def enml(xm)
       xm.li {
         xm.strong(@label) unless @label.empty?
-        xm << " " << @description
+        # xm.span @description
+        xm << " " << @description.encode(xml: :text)
       }
     end
   end
