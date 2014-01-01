@@ -19,4 +19,6 @@ Gem::Specification.new do |gem|
   
   gem.add_dependency('plist', '~> 3.1')
   gem.add_dependency('builder', '~> 2.0')
+
+  gem.add_development_dependency 'pry'
 end
