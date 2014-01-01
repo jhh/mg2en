@@ -10,9 +10,10 @@ module Mg2en
         @measurement = i['MEASUREMENT']
         @description = i['DESCRIPTION']
         @direction   = i['DIRECTION']
-        @group       = i['IS_DIVIDER']
+        @group       = false
       elsif i.has_key?('DIVIDER_INGREDIENT')
         @group       = true
+        @description = i['DIVIDER_INGREDIENT']['DESCRIPTION']
         @ingredients = Array.new
         ingts = i['INGREDIENTS']
         ingts.each do |ing|
@@ -25,7 +26,16 @@ module Mg2en
     end
 
     def enml
-      "#{self.quantity} #{self.measurement} #{self.description}, #{self.direction}"
+      if self.group?
+        return "#{self.description}"
+      else
+        output = ""
+        output << @quantity unless @quantity.empty?
+        output << " " << @measurement unless @measurement.empty?
+        output << " " << @description
+        output << ", " << @direction unless @direction.empty?
+        return output
+      end
     end
   end
 end

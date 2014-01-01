@@ -1447,7 +1447,7 @@
 				<key>MEASUREMENT</key>
 				<string>pound</string>
 				<key>QUANTITY</key>
-				<string>1</string>
+				<string>1.5</string>
 			</dict>
 			<dict>
 				<key>DIVIDER_INGREDIENT</key>
