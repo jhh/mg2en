@@ -1471,7 +1471,7 @@
 				<array>
 					<dict>
 						<key>DESCRIPTION</key>
-						<string>saffron threads</string>
+						<string>saffron</string>
 						<key>DIRECTION</key>
 						<string></string>
 						<key>INCLUDED_RECIPE_ID</key>
@@ -1481,7 +1481,7 @@
 						<key>IS_MAIN</key>
 						<false/>
 						<key>MEASUREMENT</key>
-						<string></string>
+						<string>threads</string>
 						<key>QUANTITY</key>
 						<string>3</string>
 					</dict>
