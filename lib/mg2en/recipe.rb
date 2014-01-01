@@ -2,13 +2,18 @@ require 'builder'
 module Mg2en
 
   class Recipe
-    attr_accessor :name, :summary, :note, :source, :url
+    attr_reader :name, :summary, :note, :source, :url
     attr_reader :ingredients, :directions, :notes
 
-    def initialize
+    def initialize(r)
       @ingredients = Array.new
       @directions  = Array.new
       @notes       = Array.new
+      @name    = r['NAME']
+      @summary = r['SUMMARY']
+      @note    = r['NOTE']
+      @source  = r['SOURCE']
+      @url     = r['PUBLICATION_PAGE']
     end
 
     def enml
