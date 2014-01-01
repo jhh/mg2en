@@ -22,7 +22,7 @@ module Mg2en
         xm.h2("INGREDIENTS")
         xm.ul {
           self.ingredients.each do |i|
-            xm.li("#{i.quantity} #{i.measurement} #{i.description}, #{i.direction}")
+            xm.li(i.enml)
           end
         }
         xm.h2("DIRECTIONS")
