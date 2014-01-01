@@ -19,13 +19,13 @@ module Mg2en
       xm.tag!("en-note") {
         xm.h1(self.name)
         xm.p(self.summary)
-        xm.p("INGREDIENTS")
+        xm.h2("INGREDIENTS")
         xm.ul {
           self.ingredients.each do |i|
             xm.li("#{i.quantity} #{i.measurement} #{i.description}, #{i.direction}")
           end
         }
-        xm.p("DIRECTIONS")
+        xm.h2("DIRECTIONS")
         xm.ol {
           self.directions.each do |d|
             xm.li(d.description)
