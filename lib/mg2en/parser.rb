@@ -4,6 +4,8 @@ module Mg2en
 
   def Mg2en::parse_xml(filename_or_xml)
     recipe_input = Plist::parse_xml(filename_or_xml)
+    raise ArgumentError unless recipe_input
+
     recipe_list = Array.new
 
     recipe_input.each do |r|
