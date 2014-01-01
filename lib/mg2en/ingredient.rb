@@ -25,16 +25,26 @@ module Mg2en
       end
     end
 
-    def enml
+    def enml(xm)
       if self.group?
-        return "#{self.description}"
+        xm.li {
+          xm << @description
+          xm.ul {
+            nested_output = ""
+            b = Builder::XmlMarkup.new(target:nested_output)
+            @ingredients.each do |i|
+              i.enml(b)
+            end
+            xm << nested_output
+          }
+        }
       else
         output = ""
         output << @quantity unless @quantity.empty?
         output << " " << @measurement unless @measurement.empty?
         output << " " << @description
         output << ", " << @direction unless @direction.empty?
-        return output
+        xm.li(output)
       end
     end
   end

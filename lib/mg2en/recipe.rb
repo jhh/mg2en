@@ -27,13 +27,13 @@ module Mg2en
         xm.h2("INGREDIENTS")
         xm.ul {
           self.ingredients.each do |i|
-            xm.li(i.enml)
+            i.enml(xm)
           end
         }
         xm.h2("DIRECTIONS")
         xm.ol {
           self.directions.each do |d|
-            xm.li(d.description)
+            d.enml(xm)
           end
         }
         xm.p("NOTES")

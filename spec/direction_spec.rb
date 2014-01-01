@@ -13,4 +13,18 @@ describe Mg2en::Direction do
       expect(d[1].highlighted?).to be true
     end
   end
+
+  context "when generating ENML" do
+    let(:recipes) { Mg2en::parse_xml(File.dirname(__FILE__) + '/fixtures/1.mgourmet3') }
+    output = ""
+    let(:xm) {Builder::XmlMarkup.new(target:output)}
+    before(:each) {output = ""}
+
+    it "outputs direction" do
+      d = recipes[1].directions
+      d[0].enml(xm)
+      expect(output).to eql("<li><strong>Prepare</strong> Prepare the ingredients.</li>")
+    end
+  end
+
 end

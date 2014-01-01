@@ -15,5 +15,5 @@ module Mg2en
       end
     }
   end
-  
+
 end

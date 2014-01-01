@@ -1,3 +1,4 @@
+require 'builder'
 require 'mg2en'
 
 RSpec.configure do |config|

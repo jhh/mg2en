@@ -11,7 +11,7 @@ describe Mg2en::Ingredient do
     expect(i[0].quantity).to eql("1")
     expect(i[0].description).to eql("Garlic")
     expect(i[0].direction).to eql("")
-    expect(i[1].direction).to eql("chopped")
+    expect(i[1].direction).to eql("chopped & chopped")
     expect(i[0].group?).to be false
   end
 
@@ -27,9 +27,27 @@ describe Mg2en::Ingredient do
     expect(ig.ingredients[1].description).to eql("salt")
   end
 
-  it "generates enml" do
-    i = recipes[1].ingredients
-    expect(i[0].enml).to eql("1 clove Garlic")
-    expect(i[1].enml).to eql("1.5 pound Chicken, chopped")
+  context "when generating ENML" do
+    output = ""
+    let(:xm) {Builder::XmlMarkup.new(target:output)}
+    before(:each) {output = ""}
+
+    it "outputs ingredient" do
+      i = recipes[1].ingredients
+      i[0].enml(xm)
+      expect(output).to eql("<li>1 clove Garlic</li>")
+    end
+
+    it "handles entities" do
+      i = recipes[0].ingredients
+      i[1].enml(xm)
+      expect(output).to eql("<li>1 pound Chicken, chopped &amp; chopped</li>")
+    end
+
+    it "outputs ingredient group" do
+      i = recipes[1].ingredients
+      i[2].enml(xm)
+      expect(output).to eql("<li>Group 1<ul><li>3 threads saffron</li><li>2 teaspoons salt</li></ul></li>")
+    end
   end
 end

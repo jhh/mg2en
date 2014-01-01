@@ -127,7 +127,7 @@
 				<key>DESCRIPTION</key>
 				<string>Chicken</string>
 				<key>DIRECTION</key>
-				<string>chopped</string>
+				<string>chopped &amp; chopped</string>
 				<key>INCLUDED_RECIPE_ID</key>
 				<integer>-1</integer>
 				<key>IS_DIVIDER</key>
