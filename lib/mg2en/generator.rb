@@ -1,3 +1,4 @@
+require 'base64'
 module Mg2en
 
   def Mg2en::emit_enml(recipe_list)
@@ -15,6 +16,12 @@ module Mg2en
             xm.source(recipe.source)
             xm.tag!(:"source-url") { xm.text! recipe.url }
           }
+          if recipe.image
+            xm.resource {
+              xm.data(encoding: "base64") { |d| d << Base64.encode64(recipe.image)}
+              xm.mime("image/jpeg")
+            }
+          end
         }
       end
     }
