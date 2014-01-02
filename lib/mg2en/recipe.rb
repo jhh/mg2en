@@ -20,7 +20,7 @@ module Mg2en
     def enml
       output = ""
       xm = Builder::XmlMarkup.new(target:output)
-      xm.instruct! :xml, version:"1.0", encoding:"UTF-8"
+      xm.instruct! :xml, version: "1.0", encoding: "UTF-8"
       xm.declare! :DOCTYPE, :"en-note", :SYSTEM, "http://xml.evernote.com/pub/enml2.dtd"
       xm.tag!("en-note") {
         xm.h1(self.name)
@@ -43,6 +43,7 @@ module Mg2en
             xm.li(n)
           end
         }
+        xm.tag!("en-media", type: "image/jpeg", hash: Digest::MD5.hexdigest(@image)) if @image
       }
       output
     end
