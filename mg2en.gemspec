@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   
   gem.add_dependency('plist', '~> 3.1')
-  gem.add_dependency('builder', '~> 2.0')
+  gem.add_dependency('builder', '~> 3.2')
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec'
