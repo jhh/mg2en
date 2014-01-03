@@ -22,6 +22,7 @@ option_parser = OptionParser.new do |opts|
 end.parse!
 
 input_file = ARGV[0]
+output_file = ARGV[1]
 
 unless input_file && File.exists?(input_file)
   puts "ERROR: input file not found"
@@ -29,4 +30,4 @@ unless input_file && File.exists?(input_file)
 end
 
 r = Mg2en::parse_xml(input_file)
-Mg2en::emit_enml(r)
+Mg2en::emit_enex(r, output_file)

@@ -1,9 +1,13 @@
 require 'base64'
 module Mg2en
 
-  def Mg2en::emit_enml(recipe_list)
-    # output = ""
-    xm = Builder::XmlMarkup.new(target:STDOUT)
+  def Mg2en::emit_enex(recipe_list, destination=nil)
+    if destination
+      df = open(destination, "w")
+      xm = Builder::XmlMarkup.new(target:df)
+    else
+      xm = Builder::XmlMarkup.new(target:STDOUT)
+    end
     xm.instruct! :xml, version:"1.0", encoding:"UTF-8"
     xm.declare! :DOCTYPE, :"en-export", :SYSTEM, "http://xml.evernote.com/pub/evernote-export3.dtd"
     xm.tag!(:"en-export", :"export-date" => Time.new.strftime("%Y%m%dT%H%M%S%z"),
@@ -25,6 +29,7 @@ module Mg2en
         }
       end
     }
+    df.close if destination
   end
 
 end
