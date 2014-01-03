@@ -1,15 +1,23 @@
 require "bundler/gem_tasks"
 require 'pathname'
 
-# defaults for environment variables
-ENV['ENEX'] ||= File.expand_path('../tmp/fixture.enex', __FILE__)
-ENV['NOTEBOOK'] ||= "Test"
-ENV['MG3'] ||= File.expand_path('../spec/fixtures/1.mgourmet3', __FILE__)
+# defaults for environment variables:
+# MG3=spec/fixtures/1.mgourmet3
+# ENEX=tmp/<basename of MG3>.enex
+# NOTEBOOK=Test
 
-# display task description paths as relative paths
+notebook = ENV['NOTEBOOK'] || "Test"
+
+# paths to source (mg3) and dest (enex)
+mg3 = ENV['MG3'] ? File.absolute_path(ENV['MG3']) :
+  File.expand_path( '../spec/fixtures/1.mgourmet3', __FILE__)
+enex = ENV['ENEX'] ? File.absolute_path(ENV['ENEX']) :
+  File.join(File.expand_path( '../tmp', __FILE__), File.basename(mg3, '.mgourmet3') + '.enex')
+
+# display task description paths as relative paths to fit rake -T line
 pwd = Pathname.new(Dir.getwd)
-enex_path = Pathname.new(ENV['ENEX']).relative_path_from(pwd)
-mg3_path = Pathname.new(ENV['MG3']).relative_path_from(pwd)
+enex_relpath = Pathname.new(enex).relative_path_from(pwd)
+mg3_relpath = Pathname.new(mg3).relative_path_from(pwd)
 
 task :default => [:preview]
 
@@ -17,10 +25,10 @@ task :default => [:preview]
 #   - MG3: conversion source file, defaults as above
 #   - ENEX: conversion destination file, defaults as above
 # e.g. MG3=/tmp/notes.macgourmet3 ENEX=/tmp/notes.enex rake convert
-desc "Convert MG3=#{mg3_path} to ENEX=#{enex_path}"
+desc "Convert MG3=#{mg3_relpath} to ENEX=#{enex_relpath}"
 task :convert do
-  r = Mg2en::parse_xml(ENV['MG3'])
-  Mg2en::emit_enex(r, ENV['ENEX'])
+  r = Mg2en::parse_xml(mg3)
+  Mg2en::emit_enex(r, enex)
 end
 
 # Tell Evernote to import file to notebook specified by environment variables:
@@ -28,13 +36,13 @@ end
 #   - NOTEBOOK: the target notebook, defaults as above, must exist
 # e.g. ENEX=/tmp/notes.enex NOTEBOOK=Notes rake import
 
-desc "Imports ENEX=#{enex_path} into NOTEBOOK=#{ENV['NOTEBOOK']} (OS X only)"
+desc "Imports ENEX=#{enex_relpath} into NOTEBOOK=#{notebook} (OS X only)"
 task :import do
   raise "task requires AppleScript" unless RUBY_PLATFORM =~ /darwin/
 
   system "osascript -e 'tell application \"Evernote\" to import POSIX \
-    file \"#{ENV['ENEX']}\" to notebook \"#{ENV['NOTEBOOK']}\"'"
+    file \"#{enex}\" to notebook \"#{notebook}\"'"
 end
 
-desc "Convert and preview MG3=#{mg3_path} in NOTEBOOK=#{ENV['NOTEBOOK']} (OS X only)"
+desc "Convert and preview MG3=#{mg3_relpath} in NOTEBOOK=#{notebook} (OS X only)"
 task :preview => [:convert, :import]
