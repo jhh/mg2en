@@ -1,4 +1,6 @@
 require 'builder'
+require 'digest'
+
 module Mg2en
 
   class Recipe
