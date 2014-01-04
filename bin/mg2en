@@ -19,6 +19,26 @@ option_parser = OptionParser.new do |opts|
     exit
   end
 
+  opts.on("-t", "--template TEMPLATE",
+  "Name of template",
+  "  (e.g. --template default)") do |t|
+    unless File.exists?(File.expand_path("../../templates/#{t}.haml", __FILE__))
+      puts "ERROR: templates/#{t}.haml not found"
+      exit
+    end
+    Mg2en::Options.defaults[:template] = t
+  end
+
+  opts.on("-l", "--list-templates", "List included templates") do
+    templates_dir = File.expand_path("../../templates", __FILE__)
+    Dir.foreach(templates_dir) do |t|
+      if t =~ /^(.+)\.haml$/
+        puts Regexp.last_match(1)
+      end
+    end
+    exit
+  end
+
 end.parse!
 
 input_file = ARGV[0]

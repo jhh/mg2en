@@ -20,7 +20,8 @@ module Mg2en
     end
 
     def enml
-      template = File.expand_path("../../../templates/default.haml", __FILE__)
+      template_file = Mg2en::Options.defaults[:template] + '.haml'
+      template = File.expand_path("../../../templates/#{template_file}", __FILE__)
       engine = Haml::Engine.new(File.open(template).read)
       engine.render(self)
     end
