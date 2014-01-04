@@ -1,8 +1,8 @@
 !!! XML
 <!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
 %en-note
-  %h1= @name
-  %p= @summary
+  %h1&= @name
+  %p&= @summary
   %h2 INGREDIENTS
   %ul
     - @ingredients.each do |i|
