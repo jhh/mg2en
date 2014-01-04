@@ -10,13 +10,9 @@ module Mg2en
       @highlighted = d['IS_HIGHLIGHTED']
     end
 
-    def enml(xm)
-      xm.li {
-        xm.strong(@label) unless @label.empty?
-        # xm.span @description
-        xm << " " << @description.encode(xml: :text)
-      }
+    def to_s
+      "#{label} #{description} #{highlighted}"
     end
-  end
 
+  end
 end

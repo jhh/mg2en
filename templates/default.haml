@@ -1,0 +1,25 @@
+!!! XML
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+%en-note
+  %h1= @name
+  %p= @summary
+  %h2 INGREDIENTS
+  %ul
+    - @ingredients.each do |i|
+      %li
+        &= i
+        - if i.group?
+          %ul
+            - i.ingredients.each do |ii|
+              %li&= ii
+  %h2 DIRECTIONS
+  %ol
+    - @directions.each do |d|
+      %li&= d
+  %h2 NOTES
+  %ul
+    - @notes.each do |n|
+      %li&= n
+  - if @image
+    %en-media{type: "image/jpeg", hash: Digest::MD5.hexdigest(@image)}/
+-#     xm.tag!("en-media", type: "image/jpeg", hash: Digest::MD5.hexdigest(@image)) if @image

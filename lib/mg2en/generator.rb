@@ -1,3 +1,4 @@
+require 'builder'
 require 'base64'
 module Mg2en
 

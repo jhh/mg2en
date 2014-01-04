@@ -1,6 +1,8 @@
 require "bundler/gem_tasks"
 require 'pathname'
 
+task :default => [:preview]
+
 # defaults for environment variables:
 # MG3=spec/fixtures/1.mgourmet3
 # ENEX=tmp/<basename of MG3>.enex
@@ -18,8 +20,6 @@ enex = ENV['ENEX'] ? File.absolute_path(ENV['ENEX']) :
 pwd = Pathname.new(Dir.getwd)
 enex_relpath = Pathname.new(enex).relative_path_from(pwd)
 mg3_relpath = Pathname.new(mg3).relative_path_from(pwd)
-
-task :default => [:preview]
 
 # Convert to/from files specified by environment vairiables:
 #   - MG3: conversion source file, defaults as above
@@ -46,3 +46,11 @@ end
 
 desc "Convert and preview MG3=#{mg3_relpath} in NOTEBOOK=#{notebook} (OS X only)"
 task :preview => [:convert, :import]
+
+desc "Render ENML for #{mg3_relpath}"
+task :enml do
+  recipes = Mg2en::parse_xml(mg3)
+  recipes.each do |r|
+    puts r.enml
+  end
+end
