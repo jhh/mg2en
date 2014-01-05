@@ -29,6 +29,11 @@ module Mg2en
       return @description if self.group?
       output = ""
       output << @quantity unless @quantity.empty?
+      output << without_quantity
+    end
+
+    def without_quantity
+      output = ""
       output << " " << @measurement unless @measurement.empty?
       output << " " << @description
       output << ", " << @direction unless @direction.empty?

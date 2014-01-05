@@ -18,11 +18,16 @@ describe Mg2en::Recipe do
     expect(n[1]).to eql("This is a chef note.")
   end
 
-  it "passes validation" do
+  context "when validating templates" do
     dtd = XML::Dtd.new(File.read("spec/dtds/enml2.dtd"))
-    recipes.each do |recipe|
-      doc = XML::Document.string(recipe.enml)
-      expect(doc.validate(dtd)).to be true
+    ['default', 'tables'].each do |template|
+      it "#{template} template passes" do
+        Mg2en::Options.defaults[:template] = template
+        recipes.each do |recipe|
+          doc = XML::Document.string(recipe.enml)
+          expect(doc.validate(dtd)).to be true
+        end
+      end
     end
   end
 
