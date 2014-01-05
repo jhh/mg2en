@@ -43,7 +43,7 @@ task :import do
   raise "task requires AppleScript" unless RUBY_PLATFORM =~ /darwin/
 
   system "osascript -e 'tell application \"Evernote\" to import POSIX \
-    file \"#{enex}\" to notebook \"#{notebook}\"'"
+    file \"#{enex}\" to notebook \"#{notebook}\" tags true'"
 end
 
 desc "Convert and preview MG3=#{mg3_relpath} in NOTEBOOK=#{notebook} (OS X only)"

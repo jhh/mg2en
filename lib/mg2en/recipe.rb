@@ -7,12 +7,13 @@ module Mg2en
 
   class Recipe
     attr_reader :name, :summary, :note, :source, :url, :image
-    attr_reader :ingredients, :directions, :notes
+    attr_reader :ingredients, :directions, :notes, :tags
 
     def initialize(r)
       @ingredients = Array.new
       @directions  = Array.new
       @notes       = Array.new
+      @tags        = Array.new
       @name        = r['NAME']
       @summary     = r['SUMMARY']
       @note        = r['NOTE']

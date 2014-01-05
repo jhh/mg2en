@@ -21,8 +21,16 @@ module Mg2en
         recipe.directions.push direction
       end
 
-      r['NOTES_LIST'].each do |n|
-        recipe.notes.push n['NOTE_TEXT']
+      if r['NOTES_LIST']
+        r['NOTES_LIST'].each do |n|
+          recipe.notes.push n['NOTE_TEXT']
+        end
+      end
+
+      if r['CATEGORIES']
+        r['CATEGORIES'].each do |c|
+          recipe.tags.push c['NAME']
+        end
       end
 
       recipe_list.push recipe

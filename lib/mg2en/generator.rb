@@ -17,6 +17,9 @@ module Mg2en
         xm.note {
           xm.title(recipe.name)
           xm.content {xm.cdata!(recipe.enml)}
+          recipe.tags.each do |t|
+            xm.tag(t)
+          end
           xm.tag!(:"note-attributes") {
             xm.source(recipe.source) if recipe.source
             xm.tag!(:"source-url") { xm.text! recipe.url } if recipe.url
