@@ -1,32 +1,43 @@
 !!! XML
 <!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
-%en-note{style: "font-family:Papyrus;font-size:larger;"}
-  %h1&= @name
+- en_note_style          = "font-family:Verdana;font-size:12px;"
+- heading_font           = "Georgia,Times"
+- title_style            = "font-family:#{heading_font};"
+- section_style          = "font-family:#{heading_font};text-transform: uppercase;font-size:14px;"
+- ingredient_group_style = "font-weight:bold;padding-left:10px;"
+- quantity_style         = "font-weight:bold;font-size:smaller;" +
+-                          "text-align:right;vertical-align:top;padding-right:1em;" +
+-                          "padding-left:1em;white-space:nowrap;"
+%en-note{style: en_note_style}
+  %h1{style: title_style}&= @name
   %p&= @summary
   %div
     - if @image
       %div{style: "float:right;padding-right:2em;"}
         %en-media{type: "image/jpeg", hash: Digest::MD5.hexdigest(@image)}/
-    %h3 INGREDIENTS
-    %table
+    %h3{style: section_style} Ingredients
+    %table{style: "margin-left:10px;"}
       - @ingredients.each do |i|
         - if i.group?
           %tr
-            %td{colspan: 2, style: "font-weight:bold;font-style:italic;"}&= i
+            %td{colspan: 2, style: ingredient_group_style}&= i
           - i.ingredients.each do |ii|
             %tr
-              %td{style: "font-weight:bold;text-align:right;padding-right:1em;padding-left:1em;"}&= ii.quantity
+              %td{style: quantity_style}&= ii.quantity
               %td&= ii.without_quantity
         - else
           %tr
-            %td{style: "font-weight:bold;text-align:right;padding-right:1em;padding-left:1em;"}&= i.quantity
+            %td{style: quantity_style}&= i.quantity
             %td&= i.without_quantity
     %div{style: "clear:both;"}
-  %h3 METHOD
+  %h3{style: section_style} Directions
   %ol
     - @directions.each do |d|
-      %li&= d
-  %h3 NOTES
+      %li
+        - unless d.label.empty?
+          %span{style: "font-weight:bold;"}&= d.label + ": "
+        &= d.description
+  %h3{style: section_style} Notes
   %ul
     - @notes.each do |n|
       %li&= n

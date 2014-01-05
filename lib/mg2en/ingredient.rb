@@ -1,16 +1,18 @@
 module Mg2en
 
   class Ingredient
-    attr_reader :measurement, :quantity, :description, :direction, :group, :ingredients
+    attr_reader :measurement, :quantity,:description, :direction, :group, :ingredients, :link
     alias_method :group?, :group
+    alias_method :link?, :link
 
     def initialize(i)
       if i.has_key?('DESCRIPTION')
+        @group       = false
         @quantity    = i['QUANTITY']
         @measurement = i['MEASUREMENT']
         @description = i['DESCRIPTION']
         @direction   = i['DIRECTION']
-        @group       = false
+        @link        = i['INCLUDED_RECIPE_ID'] > 0
       elsif i.has_key?('DIVIDER_INGREDIENT')
         @group       = true
         @description = i['DIVIDER_INGREDIENT']['DESCRIPTION']
@@ -37,6 +39,7 @@ module Mg2en
       output << " " << @measurement unless @measurement.empty?
       output << " " << @description
       output << ", " << @direction unless @direction.empty?
+      output << " (*link*)" if self.link?
       output
     end
 
