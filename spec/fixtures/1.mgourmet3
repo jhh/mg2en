@@ -163,14 +163,10 @@
 		<string></string>
 		<key>PREP_TIMES</key>
 		<array/>
-		<key>PUBLICATION_PAGE</key>
-		<string>http://example.com/A</string>
 		<key>SERVER_ID</key>
 		<integer>-1</integer>
 		<key>SERVINGS</key>
 		<integer>4</integer>
-		<key>SOURCE</key>
-		<string>Test Fixture A</string>
 		<key>SUMMARY</key>
 		<string>This is the introduction/summary.</string>
 		<key>TYPE</key>
@@ -1581,17 +1577,7 @@
 		<key>NAME</key>
 		<string>Recipe B</string>
 		<key>NOTE</key>
-		<string>This is a cooking note.
-
-This is a chef note.
-
-This is a prep note.
-
-This is a pairing note.
-
-This is a serving note.
-
-</string>
+		<string>These are the notes.</string>
 		<key>NOTES_LIST</key>
 		<array>
 			<dict>

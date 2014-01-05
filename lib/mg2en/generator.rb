@@ -18,8 +18,8 @@ module Mg2en
           xm.title(recipe.name)
           xm.content {xm.cdata!(recipe.enml)}
           xm.tag!(:"note-attributes") {
-            xm.source(recipe.source)
-            xm.tag!(:"source-url") { xm.text! recipe.url }
+            xm.source(recipe.source) if recipe.source
+            xm.tag!(:"source-url") { xm.text! recipe.url } if recipe.url
           }
           if recipe.image
             xm.resource {
