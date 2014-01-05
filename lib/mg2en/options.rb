@@ -4,7 +4,8 @@ module Mg2en
 
     @defaults = {
       :verbose  => false,
-      :template => 'default'
+      :template => 'default',
+      :image_size => 192,
     }
 
     # The default option values.
