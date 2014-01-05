@@ -1,24 +1,29 @@
 !!! XML
 <!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
-%en-note
+%en-note{style: "font-family:Papyrus;font-size:larger;"}
   %h1&= @name
   %p&= @summary
-  %h2 INGREDIENTS
-  %ul
-    - @ingredients.each do |i|
-      %li
-        &= i
-        - if i.group?
-          %ul
-            - i.ingredients.each do |ii|
-              %li&= ii
-  %h2 DIRECTIONS
+  %div
+    - if @image
+      %div{style: "float:right;"}
+        %en-media{type: "image/jpeg", width: 192, height: 192, hash: Digest::MD5.hexdigest(@image)}/
+    %h3 INGREDIENTS
+    %ul{style: "list-style-type: none;"}
+      - @ingredients.each do |i|
+        %li
+          - if i.group?
+            %span{style: "font-weight:bold;font-style:italic;"}&= i
+            %ul{style: "list-style-type: none;"}
+              - i.ingredients.each do |ii|
+                %li&= ii
+          - else
+            &= i
+    %div{style: "clear:both;"}
+  %h3 METHOD
   %ol
     - @directions.each do |d|
       %li&= d
-  %h2 NOTES
+  %h3 NOTES
   %ul
     - @notes.each do |n|
       %li&= n
-  - if @image
-    %en-media{type: "image/jpeg", hash: Digest::MD5.hexdigest(@image)}/

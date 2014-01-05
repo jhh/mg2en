@@ -7,8 +7,10 @@ task :default => [:preview]
 # MG3=spec/fixtures/1.mgourmet3
 # ENEX=tmp/<basename of MG3>.enex
 # NOTEBOOK=Test
+# TEMPLATE=default
 
 notebook = ENV['NOTEBOOK'] || "Test"
+Mg2en::Options.defaults[:template] = ENV['TEMPLATE'] || "default"
 
 # paths to source (mg3) and dest (enex)
 mg3 = ENV['MG3'] ? File.absolute_path(ENV['MG3']) :
