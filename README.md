@@ -6,6 +6,11 @@ between their respective export formats. The resulting Evernote export file
 
 This early version does not convert all recipe attributes.
 
+## Installation
+
+* Download and install [FreeImage](http://sourceforge.net/projects/freeimage/).
+  [Homebrew](http://brew.sh) users can `brew install freeimage`.
+
 ## Usage
 
 `bundle exec bin/mg2en`

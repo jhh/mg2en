@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 require 'pathname'
+require 'mg2en'
 
 task :default => [:preview]
 
@@ -49,7 +50,7 @@ end
 desc "Convert and preview MG3=#{mg3_relpath} in NOTEBOOK=#{notebook} (OS X only)"
 task :preview => [:convert, :import]
 
-desc "Render ENML for #{mg3_relpath}"
+desc "Render ENML for MG3=#{mg3_relpath}"
 task :enml do
   recipes = Mg2en::parse_xml(mg3)
   recipes.each do |r|
