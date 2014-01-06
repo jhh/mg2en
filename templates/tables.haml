@@ -26,11 +26,15 @@
           - i.ingredients.each do |ii|
             %tr
               %td{style: quantity_style}&= ii.quantity
-              %td{style: ingredient_style}&= ii.without_quantity
+              %td{style: ingredient_style}
+                &= ii.without_quantity
+                = "FIXLINK" if ii.link?
         - else
           %tr
             %td{style: quantity_style}&= i.quantity
-            %td{style: ingredient_style}&= i.without_quantity
+            %td{style: ingredient_style}
+              &= i.without_quantity
+              = "FIXLINK" if i.link?
     %div{style: "clear:both;"}
   %h3{style: section_style} Directions
   %ol

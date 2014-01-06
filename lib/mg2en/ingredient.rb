@@ -39,7 +39,6 @@ module Mg2en
       output << " " << @measurement unless @measurement.empty?
       output << " " << @description
       output << ", " << @direction unless @direction.empty?
-      output << " (*link*)" if self.link?
       output
     end
 
