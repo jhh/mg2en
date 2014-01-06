@@ -2,6 +2,7 @@ require 'haml'
 require 'digest'
 require 'image_science'
 require 'tempfile'
+require 'active_support/core_ext/object/blank'
 
 module Mg2en
 
@@ -19,6 +20,8 @@ module Mg2en
       @note        = r['NOTE']
       @source      = r['SOURCE']
       @url         = r['PUBLICATION_PAGE']
+      @yield       = r['YIELD']
+      @servings    = r['SERVINGS']
       scale_image(r['IMAGE'].read) if r['IMAGE']
     end
 
