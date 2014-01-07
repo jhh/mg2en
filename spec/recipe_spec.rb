@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Mg2en::Recipe do
 
   let(:recipes) { Mg2en::parse_xml(File.dirname(__FILE__) + '/fixtures/1.mgourmet3') }
+  let(:bad_url) { Mg2en::parse_xml(File.dirname(__FILE__) + '/fixtures/2.mgourmet3') }
 
   it "parses recipe" do
     r = recipes[1]
@@ -18,9 +19,17 @@ describe Mg2en::Recipe do
     expect(n[1]).to eql("This is a chef note.")
   end
 
+  it "ignores bad source URL" do
+    expect(bad_url[0].url).to be nil
+  end
+
+  it "returns empty string for empty source" do
+    expect(bad_url[0].source).to be_empty
+  end
+
   context "when validating templates" do
     dtd = XML::Dtd.new(File.read("spec/dtds/enml2.dtd"))
-    ['default', 'tables'].each do |template|
+    ['default'].each do |template|
       it "#{template} template passes" do
         Mg2en::Options.defaults[:template] = template
         recipes.each do |recipe|

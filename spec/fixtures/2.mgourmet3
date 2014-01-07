@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>AFFILIATE_ID</key>
+		<integer>-1</integer>
+		<key>COURSE_ID</key>
+		<integer>0</integer>
+		<key>COURSE_NAME</key>
+		<string>--</string>
+		<key>CUISINE_ID</key>
+		<integer>-1</integer>
+		<key>DIFFICULTY</key>
+		<integer>0</integer>
+		<key>DIRECTIONS_LIST</key>
+		<array/>
+		<key>INGREDIENTS_TREE</key>
+		<array/>
+		<key>KEYWORDS</key>
+		<string></string>
+		<key>MEASUREMENT_SYSTEM</key>
+		<integer>0</integer>
+		<key>NAME</key>
+		<string>Invalid URL</string>
+		<key>NOTE</key>
+		<string></string>
+		<key>NOTES_LIST</key>
+		<array/>
+		<key>NUTRITION</key>
+		<string></string>
+		<key>PREP_TIMES</key>
+		<array/>
+		<key>PUBLICATION_PAGE</key>
+		<string>http://This is Bogus</string>
+		<key>SERVER_ID</key>
+		<integer>-1</integer>
+		<key>SERVINGS</key>
+		<integer>0</integer>
+		<key>SOURCE</key>
+		<string></string>
+		<key>SUMMARY</key>
+		<string></string>
+		<key>TYPE</key>
+		<integer>102</integer>
+		<key>URL</key>
+		<string></string>
+		<key>YIELD</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

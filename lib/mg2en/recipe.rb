@@ -2,6 +2,7 @@ require 'haml'
 require 'digest'
 require 'image_science'
 require 'tempfile'
+require 'uri'
 require 'active_support/core_ext/object/blank'
 
 module Mg2en
@@ -19,7 +20,7 @@ module Mg2en
       @summary     = r['SUMMARY']
       @note        = r['NOTE']
       @source      = r['SOURCE']
-      @url         = r['PUBLICATION_PAGE']
+      @url         = check_url(r['PUBLICATION_PAGE'])
       @yield       = r['YIELD']
       @servings    = r['SERVINGS']
       scale_image(r['IMAGE'].read) if r['IMAGE']
@@ -43,6 +44,17 @@ module Mg2en
         file.close
         file.unlink
       end
+    end
+
+    def check_url(url)
+      uri = URI.parse(url)
+      if uri.scheme.eql?('http') || uri.scheme.eql?('https')
+        return uri.to_s
+      else
+        return nil
+      end
+    rescue
+      return nil
     end
 
   end
