@@ -1,12 +1,11 @@
 require 'plist'
-
+# Parse a MacGourmet 3 Plist export file into array of recipe objects.
 module Mg2en
+  def self.parse_xml(filename_or_xml)
+    recipe_input = Plist.parse_xml(filename_or_xml)
+    fail ArgumentError, 'Unable to parse input' unless recipe_input
 
-  def Mg2en::parse_xml(filename_or_xml)
-    recipe_input = Plist::parse_xml(filename_or_xml)
-    raise ArgumentError unless recipe_input
-
-    recipe_list = Array.new
+    recipe_list = []
 
     recipe_input.each do |r|
       recipe = Mg2en::Recipe.new(r)
@@ -37,5 +36,4 @@ module Mg2en
     end
     recipe_list
   end
-
 end

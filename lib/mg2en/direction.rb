@@ -1,5 +1,5 @@
 module Mg2en
-
+  # This class holds a recipe direction step.
   class Direction
     attr_reader :description, :label, :highlighted
     alias_method :highlighted?, :highlighted
@@ -13,6 +13,5 @@ module Mg2en
     def to_s
       "#{label} #{description} #{highlighted}"
     end
-
   end
 end

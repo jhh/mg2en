@@ -4,37 +4,33 @@ require 'optparse'
 require 'ostruct'
 require 'mg2en.rb'
 
-options = OpenStruct.new
-options.verbose = false
+OptionParser.new do |opts|
+  opts.banner = 'Usage: mg2en [options] file'
 
-option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: mg2en [options] file"
-
-  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
-    options.verbose = v
+  opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
+    Mg2en::Options.defaults[:verbose] = v
   end
 
-  opts.on("--version", "Show version") do
+  opts.on('--version', 'Show version') do
     puts Mg2en::VERSION
     exit
   end
 
-  opts.on("-t", "--template TEMPLATE",
-  "Name of template",
-  "  (e.g. --template default)") do |t|
-    unless File.exists?(File.expand_path("../../templates/#{t}.haml", __FILE__))
+  opts.on('-t', '--template TEMPLATE',
+          'Name of template',
+          '  (e.g. --template default)') do |t|
+    unless File.exists?(File.expand_path("../../templates/#{t}.haml",
+                                         __FILE__))
       puts "ERROR: templates/#{t}.haml not found"
       exit
     end
     Mg2en::Options.defaults[:template] = t
   end
 
-  opts.on("-l", "--list-templates", "List included templates") do
-    templates_dir = File.expand_path("../../templates", __FILE__)
+  opts.on('-l', '--list-templates', 'List included templates') do
+    templates_dir = File.expand_path('../../templates', __FILE__)
     Dir.foreach(templates_dir) do |t|
-      if t =~ /^(.+)\.haml$/
-        puts Regexp.last_match(1)
-      end
+      puts Regexp.last_match(1) if t =~ /^(.+)\.haml$/
     end
     exit
   end
@@ -45,9 +41,14 @@ input_file = ARGV[0]
 output_file = ARGV[1]
 
 unless input_file && File.exists?(input_file)
-  puts "ERROR: input file not found"
+  puts 'ERROR: input file not found'
   exit
 end
 
-r = Mg2en::parse_xml(input_file)
-Mg2en::emit_enex(r, output_file)
+r = Mg2en.parse_xml(input_file)
+Mg2en.emit_enex(r, output_file)
+
+if Mg2en::Options.defaults[:verbose]
+  puts "Converted #{input_file} to #{output_file}" \
+    " using template #{Mg2en::Options.defaults[:template]}"
+end
