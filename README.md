@@ -1,19 +1,33 @@
 # MacGourmet to Evernote
 
-A small command-line tool to move MacGourmet recipes to Evernote by converting
-between their respective export formats. The resulting Evernote export file
-(*.enex) can be imported into Evernote.
+A library to parse a MacGourmet 3 export file and convert into an Evernote
+export file. The resulting Evernote export file (*.enex) can be imported into
+Evernote.
 
-This early version does not convert all recipe attributes.
+This converts most, but not all, MacGourmet recipe attributes.
 
 ## Installation
 
-* Download and install [FreeImage](http://sourceforge.net/projects/freeimage/).
-  [Homebrew](http://brew.sh) users can `brew install freeimage`.
+Download and install [FreeImage](http://sourceforge.net/projects/freeimage/).
+  [Homebrew](http://brew.sh) users can:
+
+    brew install freeimage
+
+Add this line to your application's Gemfile:
+
+    gem 'mg2en'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install mg2en
 
 ## Usage
 
-`bundle exec bin/mg2en`
+    mg2en -h
 
 ## Contributing
 

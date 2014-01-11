@@ -6,7 +6,7 @@ require 'ostruct'
 require 'mg2en'
 
 OptionParser.new do |opts|
-  opts.banner = 'Usage: mg2en [options] file'
+  opts.banner = 'Usage: mg2en [options] input_file [output_file]'
 
   opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
     Mg2en::Options.defaults[:verbose] = v
