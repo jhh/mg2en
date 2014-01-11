@@ -24,6 +24,11 @@ describe Mg2en::Recipe do
     expect(n[1]).to eql('This is a chef note.')
   end
 
+  it "parses cuisines" do
+    c = parser.recipes[1].cuisine
+    expect(c).to eql(['North American', 'United States', 'Southern', 'Cajun'])
+  end
+
   it 'ignores bad source URL' do
     expect(bad_url_parser.recipes[0].url).to be nil
   end

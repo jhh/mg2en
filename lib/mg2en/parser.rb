@@ -10,32 +10,8 @@ module Mg2en
       fail ArgumentError, 'Unable to parse input' unless recipe_input
 
       @recipes = []
-
       recipe_input.each do |r|
         recipe = Mg2en::Recipe.new(r)
-
-        r['INGREDIENTS_TREE'].each do |i|
-          ingredient = Mg2en::Ingredient.new(i)
-          recipe.ingredients.push ingredient
-        end
-
-        r['DIRECTIONS_LIST'].each do |d|
-          direction = Mg2en::Direction.new(d)
-          recipe.directions.push direction
-        end
-
-        if r['NOTES_LIST']
-          r['NOTES_LIST'].each do |n|
-            recipe.notes.push n['NOTE_TEXT']
-          end
-        end
-
-        if r['CATEGORIES']
-          r['CATEGORIES'].each do |c|
-            recipe.tags.push c['NAME']
-          end
-        end
-
         @recipes.push recipe
       end
     end

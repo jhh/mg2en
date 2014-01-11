@@ -11,13 +11,9 @@ module Mg2en
   # This class holds a recipe.
   class Recipe
     attr_reader :name, :summary, :note, :source, :url, :image
-    attr_reader :ingredients, :directions, :notes, :tags
+    attr_reader :ingredients, :directions, :notes, :tags, :cuisine
 
     def initialize(r)
-      @ingredients = []
-      @directions  = []
-      @notes       = []
-      @tags        = []
       @name        = r['NAME']
       @summary     = r['SUMMARY']
       @note        = r['NOTE']
@@ -26,6 +22,27 @@ module Mg2en
       @yield       = r['YIELD']
       @servings    = r['SERVINGS']
       scale_image(r['IMAGE'].read) if r['IMAGE']
+
+      @ingredients = []
+      r['INGREDIENTS_TREE'].each do |i|
+        ingredient = Mg2en::Ingredient.new(i)
+        @ingredients.push ingredient
+      end
+
+      @directions  = []
+      r['DIRECTIONS_LIST'].each do |d|
+        direction = Mg2en::Direction.new(d)
+        @directions.push direction
+      end
+
+      @notes       = []
+      r['NOTES_LIST'] && r['NOTES_LIST'].each { |n| @notes.push n['NOTE_TEXT'] }
+
+      @tags        = []
+      r['CATEGORIES'] && r['CATEGORIES'].each { |c| @tags.push c['NAME'] }
+
+      @cuisine     = []
+      r['CUISINE'] && r['CUISINE'].each { |c| @cuisine.push c['NAME']}
     end
 
     def enml
