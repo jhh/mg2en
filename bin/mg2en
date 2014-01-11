@@ -46,7 +46,8 @@ unless input_file && File.exists?(input_file)
 end
 
 parser = Mg2en::Parser.new(input_file)
-Mg2en.emit_enex(parser.recipes, output_file)
+generator = Mg2en::Generator.new(parser.recipes)
+generator.write(output_file)
 
 if Mg2en::Options.defaults[:verbose]
   puts "Converted #{input_file} to #{output_file}" \

@@ -31,7 +31,8 @@ mg3_relpath = Pathname.new(mg3).relative_path_from(pwd)
 desc "Convert MG3=#{mg3_relpath} to ENEX=#{enex_relpath}"
 task :convert do
   parser = Mg2en::Parser.new(mg3)
-  Mg2en::emit_enex(parser.recipes, enex)
+  generator = Mg2en::Generator.new(parser.recipes)
+  generator.write(enex)
 end
 
 # Tell Evernote to import file to notebook specified by environment variables:
