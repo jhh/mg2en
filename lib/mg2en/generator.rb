@@ -5,7 +5,7 @@ module Mg2en
   # Writes out an array of recipe objects into ENEX file.
   class Generator
     def initialize(recipes)
-      @recipes = recipes;
+      @recipes = recipes
     end
 
     def write(destination = nil)
