@@ -1,4 +1,6 @@
+require 'mg2en/recipe'
 require 'plist'
+
 module Mg2en
   # Parse a MacGourmet 3 Plist export file into array of recipe objects.
   class Parser

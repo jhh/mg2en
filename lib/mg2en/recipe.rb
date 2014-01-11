@@ -1,3 +1,5 @@
+require 'mg2en/ingredient'
+require 'mg2en/direction'
 require 'haml'
 require 'digest'
 require 'image_science'

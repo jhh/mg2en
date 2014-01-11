@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 require 'optparse'
 require 'ostruct'
-require 'mg2en.rb'
+require 'mg2en'
 
 OptionParser.new do |opts|
   opts.banner = 'Usage: mg2en [options] file'
