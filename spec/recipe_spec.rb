@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe Mg2en::Recipe do
 
-  let(:recipes) do
-    Mg2en.parse_xml(File.dirname(__FILE__) + '/fixtures/1.mgourmet3')
+  let(:parser) do
+    Mg2en::Parser.new(File.dirname(__FILE__) + '/fixtures/1.mgourmet3')
   end
 
-  let(:bad_url) do
-    Mg2en.parse_xml(File.dirname(__FILE__) + '/fixtures/2.mgourmet3')
+  let(:bad_url_parser) do
+    Mg2en::Parser.new(File.dirname(__FILE__) + '/fixtures/2.mgourmet3')
   end
 
   it 'parses recipe' do
-    r = recipes[1]
+    r = parser.recipes[1]
     expect(r.name).to eql('Recipe B')
     expect(r.summary).to eql('This is the introduction/summary.')
     expect(r.note).to eql('These are the notes.')
@@ -20,16 +20,16 @@ describe Mg2en::Recipe do
   end
 
   it 'parses notes' do
-    n = recipes[1].notes
+    n = parser.recipes[1].notes
     expect(n[1]).to eql('This is a chef note.')
   end
 
   it 'ignores bad source URL' do
-    expect(bad_url[0].url).to be nil
+    expect(bad_url_parser.recipes[0].url).to be nil
   end
 
   it 'returns empty string for empty source' do
-    expect(bad_url[0].source).to be_empty
+    expect(bad_url_parser.recipes[0].source).to be_empty
   end
 
   context 'when validating templates' do
@@ -37,7 +37,7 @@ describe Mg2en::Recipe do
     ['default'].each do |template|
       it "#{template} template passes" do
         Mg2en::Options.defaults[:template] = template
-        recipes.each do |recipe|
+        parser.recipes.each do |recipe|
           doc = XML::Document.string(recipe.enml)
           expect(doc.validate(dtd)).to be true
         end

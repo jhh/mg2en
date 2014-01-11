@@ -45,8 +45,8 @@ unless input_file && File.exists?(input_file)
   exit
 end
 
-r = Mg2en.parse_xml(input_file)
-Mg2en.emit_enex(r, output_file)
+parser = Mg2en::Parser.new(input_file)
+Mg2en.emit_enex(parser.recipes, output_file)
 
 if Mg2en::Options.defaults[:verbose]
   puts "Converted #{input_file} to #{output_file}" \

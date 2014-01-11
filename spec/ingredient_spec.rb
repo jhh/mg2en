@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Mg2en::Ingredient do
 
-  let(:recipes) do
-    Mg2en.parse_xml(File.dirname(__FILE__) + '/fixtures/1.mgourmet3')
+  let(:parser) do
+    Mg2en::Parser.new(File.dirname(__FILE__) + '/fixtures/1.mgourmet3')
   end
 
   it 'parses ingredients' do
-    i = recipes[0].ingredients
+    i = parser.recipes[0].ingredients
     expect(i.size).to eql(2)
     expect(i[0].measurement).to eql('clove')
     expect(i[0].quantity).to eql('1')
@@ -18,7 +18,7 @@ describe Mg2en::Ingredient do
   end
 
   it 'parses ingredient groups' do
-    i = recipes[1].ingredients
+    i = parser.recipes[1].ingredients
     expect(i.size).to eql(5)
     expect(i[0].group?).to be false
     ig = i[2]
@@ -30,7 +30,7 @@ describe Mg2en::Ingredient do
   end
 
   it 'outputs ingredient' do
-    i = recipes[0].ingredients
+    i = parser.recipes[0].ingredients
     expect(i[1].to_s).to eql('1 pound Chicken, chopped & chopped')
   end
 end

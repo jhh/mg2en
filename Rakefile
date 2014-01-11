@@ -30,8 +30,8 @@ mg3_relpath = Pathname.new(mg3).relative_path_from(pwd)
 # e.g. MG3=/tmp/notes.macgourmet3 ENEX=/tmp/notes.enex rake convert
 desc "Convert MG3=#{mg3_relpath} to ENEX=#{enex_relpath}"
 task :convert do
-  r = Mg2en::parse_xml(mg3)
-  Mg2en::emit_enex(r, enex)
+  parser = Mg2en::Parser.new(mg3)
+  Mg2en::emit_enex(parser.recipes, enex)
 end
 
 # Tell Evernote to import file to notebook specified by environment variables:
@@ -52,8 +52,8 @@ task :preview => [:convert, :import]
 
 desc "Render ENML for MG3=#{mg3_relpath}"
 task :enml do
-  recipes = Mg2en::parse_xml(mg3)
-  recipes.each do |r|
+  parser = Mg2en::Parser.new(mg3)
+  parser.recipes.each do |r|
     puts r.enml
   end
 end
